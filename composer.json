@@ -1,0 +1,14 @@
+{
+	"name" : "vivi/my-awesome-project",
+	"description" : "my awesome project must have an awesome description",
+	"version" : "0.0.1",
+
+	"require" : {
+	},
+
+	"autoload": {
+		"psr-4": {
+			"IO\\" : "src/"
+		}
+	}
+}

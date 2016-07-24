@@ -1,14 +1,32 @@
 {
-	"name" : "vivi/my-awesome-project",
-	"description" : "my awesome project must have an awesome description",
-	"version" : "0.0.1",
-
+	"name" : "xgc1986/io",
+	"description" : "Pretty outputs and more",
+	"version" : "0.1.0",
+	"type" : "library",
+	"keywords" : ["io"],
+	"homepage": "https://github.com/xgc1986/php_io",
 	"require" : {
+	},
+
+	"require-dev" : {
+		"phpunit/phpunit" : "^5.0"
 	},
 
 	"autoload": {
 		"psr-4": {
 			"IO\\" : "src/"
 		}
-	}
+	},
+	 "authors": [
+	 	{
+            "name": "Javier Gonzalez",
+            "email": "xgc1986@gmail.com",
+            "homepage": "https://github.com/xgc1986",
+            "role": "Developer"
+        },
+	 ],
+	 "support" : {
+	 	"docs" : "https://github.com/xgc1986/php_io/blob/master/README.md",
+	 	"issues" : "https://github.com/xgc1986/php_io/issues"
+	 }
 }

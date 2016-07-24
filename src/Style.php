@@ -15,6 +15,8 @@ class Style {
 
 	private $code = "";
 
+	private $htmlCode = ""
+
 	public function __construct($color=self::WHITE, $background=self::BLACK, $bright=0, $underline=0) {
 
 		$this->code = "";

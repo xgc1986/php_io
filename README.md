@@ -65,10 +65,7 @@ Out::dissableDebug();
 // Currently have suport for terminals and html
 Out::format(Out::HTML); // print in a html style (theming not supporting)
 Out::format(Out::TERM); // print in a terminal style
-
-
-
-
-TODO
-[X] - print in html format
 ```
+
+## TODO
+[X] - print in html format

@@ -62,6 +62,13 @@ Out::dissableStyles();
 // And if for some reason you don't want to know where is printed
 Out::dissableDebug();
 
+// Currently have suport for terminals and html
+Out::format(Out::HTML); // print in a html style (theming not supporting)
+Out::format(Out::TERM); // print in a terminal style
+
+
+
+
 TODO
-[ ] - print in html format
+[X] - print in html format
 ```

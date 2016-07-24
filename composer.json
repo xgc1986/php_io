@@ -1,7 +1,7 @@
 {
 	"name" : "xgc1986/io",
 	"description" : "Pretty outputs and more",
-	"version" : "0.1.0",
+	"version" : "0.1.1",
 	"type" : "library",
 	"keywords" : ["io"],
 	"homepage": "https://github.com/xgc1986/php_io",

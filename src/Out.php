@@ -1,4 +1,7 @@
 <?php
+/**
+ * Main class to print to terminal or browser
+ */
 
 namespace IO;
 
@@ -11,6 +14,9 @@ use IO\Traits\Warning;
 use IO\Traits\Wtf;
 use IO\Traits\Field;
 
+/**
+ * Main class to print to terminal or browser
+ */
 class Out {
 
     use
@@ -26,6 +32,13 @@ class Out {
             Dummy::resetStyle insteadof Separator, Verbose, Info, Warning, Error, Wtf, Field;
     }
 
+    /**
+     * Prints the text with the styles given
+     * @param $text string text to output
+     * @param $tag String to show if the styles are dissabled
+     * @param $style1 look and feel of the text
+     * @param $style2 look and feel of the debbug message
+     */
     public static function log($text, $tag, $style1, $style2) {
         if (Out::$CURRENT_FORMAT === Out::TERM) {
             if ($tag) {
@@ -92,46 +105,99 @@ class Out {
     //                                4 subrayado
     //                                7 invertido
 
+    /**
+     * const to print in html mode
+     */
     const HTML = "HTML";
+
+    /**
+     * const to print in prompt mode
+     */
     const TERM = "TERM";
 
+    /**
+     * @ignore
+     */
     public static $CURRENT_FORMAT = Out::TERM;
+
+    /**
+     * @ignore
+     */
     public static $CLEAN = "\x1B[0m";
+
+    /**
+     * @ignore
+     */
     public static $EOL = "\x1B[K";
 
+    /**
+     * @ignore
+     */
     public static $fullDebug = true;
+
+    /**
+     * @ignore
+     */
     public static $styles = true;
-    public static $lines = [];
+
+    /**
+     * @ignore
+     */
     public static $emptyLines = [];
 
+    /**
+     * @ignore
+     */
     public static $level = 2;
 
-    public static $TERM_WIDTH = 0;
-
+    /**
+     * Set the output's format
+     * @param $format the foramt you want to use
+     */
     public static function format($format) {
         Out::$CURRENT_FORMAT = $format;
     }
 
+    /**
+     * Enables coloring in prompt mode
+     */
     public static function enableStyles() {
         Out::$styles = true;
     }
 
+    /**
+     * dissables coloring in prompt mode
+     */
     public static function dissableStyles() {
         Out::$styles = false;
     }
 
+    /**
+     * Modify this value if you want to print the lines of the debbug mode correctly
+     *
+     * @param the numbers of functions is needed to call the log method
+     */
     public static function setLevel($level) {
         Out::$level = $level + 2;
     }
 
+    /**
+     * Stop printing the lines
+     */
     public static function dissableDebug() {
         Out::$fullDebug = false;
     }
 
+    /**
+     * Enable printing the lines
+     */
     public static function enableDebug() {
         Out::$fullDebug = true;
     }
 
+    /**
+     * @ignore
+     */
     public static function generateSpaces($length = 80) {
         if (!isset(Out::$emptyLines[$length])) {
             $line = "";

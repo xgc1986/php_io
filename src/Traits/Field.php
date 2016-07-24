@@ -1,4 +1,7 @@
 <?php
+/**
+ * Trait that prints variables
+ */
 
 namespace IO\Traits;
 
@@ -6,29 +9,94 @@ use IO\Out;
 use IO\Terminal;
 use IO\Style;
 
+/**
+ * Trait that prints variables
+ */
 trait Field {
 
+    /**
+     * @ignore
+     */
     public static $VAR_STYLE_BG_DEFAULT = "\033[2;40m";
+
+    /**
+     * @ignore
+     */
     public static $VAR_STYLE_BG = "\033[2;40m";
 
+    /**
+     * @ignore
+     */
     public static $VAR_STYLE_TYPE_DEFAULT = "\033[2;32m";
+
+    /**
+     * @ignore
+     */
     public static $VAR_STYLE_TYPE = "\033[2;32m";
+
+    /**
+     * @ignore
+     */
     public static $HTML_VAR_STYLE_TYPE = "color:green";
 
+    /**
+     * @ignore
+     */
     public static $VAR_STYLE_VALUE_DEFAULT = "\033[1;34m";
+
+    /**
+     * @ignore
+     */
     public static $VAR_STYLE_VALUE = "\033[1;34m";
+
+    /**
+     * @ignore
+     */
     public static $HTML_VAR_STYLE_VALUE = "text-overflow:clip;overflow:hidden;color:blue";
 
+    /**
+     * @ignore
+     */
     public static $VAR_STYLE_NAME_DEFAULT = "\033[0;37m";
+
+    /**
+     * @ignore
+     */
     public static $VAR_STYLE_NAME = "\033[0;37m";
+
+    /**
+     * @ignore
+     */
     public static $HTML_VAR_STYLE_NAME = "color:black";
 
+    /**
+     * @ignore
+     */
     public static $VAR_STYLE_DBG_DEFAULT = "\033[2;32m";
+
+    /**
+     * @ignore
+     */
     public static $VAR_STYLE_DBG = "\033[2;32m";
+
+    /**
+     * @ignore
+     */
     public static $HTML_VAR_STYLE_DBG = "color:black;font-weight:bold;";
 
+    /**
+     * @ignore
+     */
     public static $INDENTATION = 2;
 
+    /**
+     * set the style of this output
+     * @param $type style of the type
+     * @param $value style of the value
+     * @param $name style of the name
+     * @param $dbg style of the debug line
+     * @param $bg style of the bg
+     */
     public static function setStyle($type, $value, $name, $dbg, $bg) {
         Out::$VAR_STYLE_BG = $bg->getCode();
         Out::$VAR_STYLE_TYPE = $type->getCode();
@@ -37,6 +105,9 @@ trait Field {
         Out::$VAR_STYLE_DBG = $dbg->getCode();
     }
 
+    /**
+     * reset the style of this output
+     */
     public static function resetStyle () {
         Out::$VAR_STYLE_BG = Out::$VAR_STYLE_BG_DEFAULT;
         Out::$VAR_STYLE_TYPE = Out::$VAR_STYLE_TYPE_DEFAULT;
@@ -45,7 +116,13 @@ trait Field {
         Out::$VAR_STYLE_DBG = Out::$VAR_STYLE_DBG_DEFAULT;
     }
 
-    public static function var($key, $value, $indentation = 0) {
+    /**
+     * Prints a variable
+     * @param $key variable name
+     * @param $value variable value
+     * @param $indentation indentation to print (default = 0)
+     */
+    public static function pvar($key, $value, $indentation = 0) {
 
         $EOL = "";
         $CLEAN = "";
@@ -149,7 +226,7 @@ trait Field {
                 }
             }
             foreach ($value as $key => $field) {
-                Field::var($key, $field, $indentation + 1);
+                Field::pvar($key, $field, $indentation + 1);
             }
         } else {
             if ($value === false) {
@@ -186,8 +263,6 @@ trait Field {
                     $spaces .= ' ';
                 }
             } else {
-
-                // TODO value muy largo
                 $value = substr($value, 0, $remaining - strlen($value) - 3) . "..." ;
             }
 

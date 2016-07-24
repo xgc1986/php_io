@@ -1,20 +1,56 @@
 <?php
+/**
+ * Trait that prints critical errors
+ */
 
 namespace IO\Traits;
 
 use IO\Out;
 
+/**
+ * Trait that prints critical errors
+ */
 trait Wtf {
 
+    /**
+     * @ignore
+     */
     public static $WTF_CODE = "WTF";
+
+    /**
+     * @ignore
+     */
     public static $WTF_STYLE_DEFAULT = "\033[1;37m\033[1;41m";
+
+    /**
+     * @ignore
+     */
     public static $WTF_STYLE_DEBUG_DEFAULT = "\033[1;37m\033[1;41m";
+
+    /**
+     * @ignore
+     */
     public static $WTF_STYLE = "\033[1;37m\033[1;41m";
+
+    /**
+     * @ignore
+     */
     public static $WTF_STYLE_DEBUG = "\033[1;37m\033[1;41m";
 
+    /**
+     * @ignore
+     */
     public static $HTML_WTF_STYLE = "background:red;color:white;font-weight:normal;text-decoration:none;";
+
+    /**
+     * @ignore
+     */
     public static $HTML_WTF_STYLE_DEBUG = "background:red;color:white;font-weight:bold;text-decoration:none;";
 
+    /**
+     * Prints an critical error
+     * @param $text text to print
+     */
     public static function wtf($text) {
         if (Out::$CURRENT_FORMAT === Out::TERM) {
             if (Out::$styles) {
@@ -36,6 +72,11 @@ trait Wtf {
         }
     }
 
+    /**
+     * set the style of this output
+     * @param $style style of the text
+     * @param $styleDebug style of the line message
+     */
     public static function setStyle($style, $styleDebug=null) {
         Wtf::$WTF_STYLE = $style->getCode();
 
@@ -44,6 +85,9 @@ trait Wtf {
         }
     }
 
+    /**
+     * reset the style of this output
+     */
     public static function resetStyle () {
         Wtf::$WTF_STYLE = Wtf::$WTF_STYLE_DEFAULT;
         Wtf::$WTF_STYLE_DEBUG = Wtf::$WTF_STYLE_DEBUG_DEFAULT;

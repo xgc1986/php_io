@@ -268,4 +268,59 @@ class IOTest extends TestCase {
             IO\Out::$level = IO\Out::$level - 1;
         }
     }
+
+    public function testHtml() {
+        IO\Out::enableDebug();
+        echo PHP_EOL;
+        IO\Out::format(IO\Out::HTML);
+
+        IO\Out::enableStyles();
+        IO\Out::enableDebug();
+        echo PHP_EOL;
+        echo "\nHtml styles\n";
+
+        IO\Out::separator();
+        IO\Out::verbose("Verbose");
+        IO\Out::verbose("This message have a lot of characters because I need a very long text to test this, because is important the it will have more characters than the screen width, but I think that I have written enough characters");
+        IO\Out::info("Info");
+        IO\Out::info("This message have a lot of characters because I need a very long text to test this, because is important the it will have more characters than the screen width, but I think that I have written enough characters");
+        IO\Out::warning("Warning");
+        IO\Out::warning("This warning have a lot of characters because I need a very long text to test this, because is important the it will have more characters than the screen width, but I think that I have written enough characters");
+        IO\Out::error("Error");
+        IO\Out::error("This error have a lot of characters because I need a very long text to test this, because is important the it will have more characters than the screen width, but I think that I have written enough characters");
+        IO\Out::wtf("WTF");
+        IO\Out::wtf("How many lines has this wtf?<br>2");
+        IO\Out::var("boolean", true);
+        IO\Out::var("boolean", false);
+        IO\Out::var("null var", NULL);
+        IO\Out::var("integer", 1);
+        IO\Out::var("integer", 0);
+        IO\Out::var("empty string", "");
+        IO\Out::var("string", "I am a string");
+        IO\Out::var("string", "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
+        IO\Out::var("object", json_decode('{"glossary":{"title":"example glossary","GlossDiv":{"title":"S","GlossList":{"GlossEntry":{"ID":"SGML","SortAs":"SGML","GlossTerm":"Standard Generalized Markup Language","Acronym":"SGML","Abbrev":"ISO 8879:1986","GlossDef":{"para":"A meta-markup language, used to create markup languages such as DocBook.","GlossSeeAlso":["GML","XML"]},"GlossSee":"markup"}}}}}'));
+
+        IO\Out::dissableDebug();
+        IO\Out::separator();
+        IO\Out::verbose("Verbose");
+        IO\Out::verbose("This message have a lot of characters because I need a very long text to test this, because is important the it will have more characters than the screen width, but I think that I have written enough characters");
+        IO\Out::info("Info");
+        IO\Out::info("This message have a lot of characters because I need a very long text to test this, because is important the it will have more characters than the screen width, but I think that I have written enough characters");
+        IO\Out::warning("Warning");
+        IO\Out::warning("This warning have a lot of characters because I need a very long text to test this, because is important the it will have more characters than the screen width, but I think that I have written enough characters");
+        IO\Out::error("Error");
+        IO\Out::error("This error have a lot of characters because I need a very long text to test this, because is important the it will have more characters than the screen width, but I think that I have written enough characters");
+        IO\Out::wtf("WTF");
+        IO\Out::wtf("How many lines has this wtf?<br>2");
+        IO\Out::var("boolean", true);
+        IO\Out::var("boolean", false);
+        IO\Out::var("null var", NULL);
+        IO\Out::var("integer", 1);
+        IO\Out::var("integer", 0);
+        IO\Out::var("empty string", "");
+        IO\Out::var("string", "I am a string");
+        IO\Out::var("string", "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
+        IO\Out::var("object", json_decode('{"glossary":{"title":"example glossary","GlossDiv":{"title":"S","GlossList":{"GlossEntry":{"ID":"SGML","SortAs":"SGML","GlossTerm":"Standard Generalized Markup Language","Acronym":"SGML","Abbrev":"ISO 8879:1986","GlossDef":{"para":"A meta-markup language, used to create markup languages such as DocBook.","GlossSeeAlso":["GML","XML"]},"GlossSee":"markup"}}}}}'));
+
+    }
 }

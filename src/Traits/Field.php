@@ -11,18 +11,21 @@ trait Field {
     public static $VAR_STYLE_BG_DEFAULT = "\033[2;40m";
     public static $VAR_STYLE_BG = "\033[2;40m";
 
-
     public static $VAR_STYLE_TYPE_DEFAULT = "\033[2;32m";
     public static $VAR_STYLE_TYPE = "\033[2;32m";
+    public static $HTML_VAR_STYLE_TYPE = "color:green";
 
     public static $VAR_STYLE_VALUE_DEFAULT = "\033[1;34m";
     public static $VAR_STYLE_VALUE = "\033[1;34m";
+    public static $HTML_VAR_STYLE_VALUE = "text-overflow:clip;overflow:hidden;color:blue";
 
     public static $VAR_STYLE_NAME_DEFAULT = "\033[0;37m";
     public static $VAR_STYLE_NAME = "\033[0;37m";
+    public static $HTML_VAR_STYLE_NAME = "color:black";
 
     public static $VAR_STYLE_DBG_DEFAULT = "\033[2;32m";
     public static $VAR_STYLE_DBG = "\033[2;32m";
+    public static $HTML_VAR_STYLE_DBG = "color:black;font-weight:bold;";
 
     public static $INDENTATION = 2;
 
@@ -85,15 +88,31 @@ trait Field {
         catch (\Exception $e) {}
         catch (\Error $e) {}
 
-        echo $VAR_STYLE_BG . $spaces . $VAR_STYLE_NAME . $key . ' : ';
+        if (Out::$CURRENT_FORMAT === Out::TERM) {
+            echo $VAR_STYLE_BG . $spaces . $VAR_STYLE_NAME . $key . ' : ';
+        } else {
+            $ind = $indentation * 25;
+            $style = self::$HTML_VAR_STYLE_NAME;
+            echo "<div style='clear:both;" . "px;'>";
+            echo "<span style='float:left;text-indent:$ind;$style'>$key&nbsp;:&nbsp;</span>";
+        }
 
         if ($array || $dicc) {
+            $style = self::$HTML_VAR_STYLE_TYPE;
             if ($dicc) {
-                echo $VAR_STYLE_TYPE . "OBJECT";
-                $length += 6;
+                if (Out::$CURRENT_FORMAT === Out::TERM) {
+                    echo $VAR_STYLE_TYPE . "OBJECT";
+                    $length += 6;
+                } else {
+                    echo "<span style='float:left;$style'>OBJECT</span>";
+                }
             } else {
-                echo $VAR_STYLE_TYPE . "ARRAY";
-                $length += 5;
+                if (Out::$CURRENT_FORMAT === Out::TERM) {
+                    echo $VAR_STYLE_TYPE . "ARRAY";
+                    $length += 5;
+                } else {
+                    echo "<span style='float:left;$style'>ARRAY</span>";
+                }
             }
 
             $out = "";
@@ -116,9 +135,18 @@ trait Field {
                     $spaces .= ' ';
                 }
 
-                echo $spaces . $VAR_STYLE_DBG . $out . $EOL . $CLEAN . "\n";
+                $style = self::$HTML_VAR_STYLE_DBG;
+                if (Out::$CURRENT_FORMAT === Out::TERM) {
+                    echo $spaces . $VAR_STYLE_DBG . $out . $EOL . $CLEAN . "\n";
+                } else {
+                    echo "<span style='float:right;$style'>$out</span></div>";
+                }
             } else {
-                echo $spaces . $VAR_STYLE_DBG . $out . $EOL . $CLEAN . "\n";
+                if (Out::$CURRENT_FORMAT === Out::TERM) {
+                    echo $spaces . $VAR_STYLE_DBG . $out . $EOL . $CLEAN . "\n";
+                } else {
+                    echo "</div>";
+                }
             }
             foreach ($value as $key => $field) {
                 Field::var($key, $field, $indentation + 1);
@@ -162,7 +190,15 @@ trait Field {
                 // TODO value muy largo
                 $value = substr($value, 0, $remaining - strlen($value) - 3) . "..." ;
             }
-            echo $VAR_STYLE_VALUE . $value . $spaces . $VAR_STYLE_DBG . $out . $EOL . $CLEAN . "\n";
+
+            $style = self::$HTML_VAR_STYLE_VALUE;
+            $style2 = self::$HTML_VAR_STYLE_DBG;
+
+            if (Out::$CURRENT_FORMAT === Out::TERM) {
+                echo $VAR_STYLE_VALUE . $value . $spaces . $VAR_STYLE_DBG . $out . $EOL . $CLEAN . "\n";
+            } else {
+                echo "<span style='float:left;$style'>$value</span><span style='float:right;$style2'>$out</span></div>";
+            }
         }
 
         Out::$fullDebug = $dbg;

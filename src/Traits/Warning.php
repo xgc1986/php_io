@@ -12,8 +12,15 @@ trait Warning {
     public static $WARNING_STYLE = "\033[0;33m";
     public static $WARNING_STYLE_DEBUG = "\033[1;33m";
 
+    public static $HTML_WARNING_STYLE = "color:orange;font-weight:normal;text-decoration:none;";
+    public static $HTML_WARNING_STYLE_DEBUG = "color:orange;font-weight:bold;text-decoration:none;";
+
     public static function warning($text) {
-        Out::log($text, Warning::$WARNING_CODE, Warning::$WARNING_STYLE, Warning::$WARNING_STYLE_DEBUG);
+        if (Out::$CURRENT_FORMAT === Out::TERM) {
+            Out::log($text, Warning::$WARNING_CODE, Warning::$WARNING_STYLE, Warning::$WARNING_STYLE_DEBUG);
+        } else {
+            Out::log($text, Warning::$WARNING_CODE, Warning::$HTML_WARNING_STYLE, Warning::$HTML_WARNING_STYLE_DEBUG);
+        }
     }
 
     public static function setStyle($style, $styleDebug=null) {

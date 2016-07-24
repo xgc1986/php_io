@@ -15,8 +15,24 @@ trait Separator {
     public static $SEPARATOR_STYLE_DEBUG = "\033[1;30m";
 
     public static function separator() {
-        $text = Separator::generateSeparatorLine(Terminal::width());
-        Out::log($text, Separator::$SEPARATOR_CODE, Separator::$SEPARATOR_STYLE, Separator::$SEPARATOR_STYLE_DEBUG);
+
+        if (Out::$CURRENT_FORMAT === Out::TERM) {
+            if (Out::$fullDebug) {
+                $bt = debug_backtrace(false, Out::$level + 2);
+                $class = $bt[Out::$level - 1]["class"];
+                $function = $bt[Out::$level - 1]["function"];
+                $line = $bt[Out::$level - 2]["line"];
+
+                $out = " $class/$function:$line";
+                $text = Separator::generateSeparatorLine(Terminal::width() - strlen($out) - 1);
+                Out::log($text, Separator::$SEPARATOR_CODE, Separator::$SEPARATOR_STYLE, Separator::$SEPARATOR_STYLE_DEBUG);
+            } else {
+                $text = Separator::generateSeparatorLine(Terminal::width());
+                Out::log($text, Separator::$SEPARATOR_CODE, Separator::$SEPARATOR_STYLE, Separator::$SEPARATOR_STYLE_DEBUG);
+            }
+        } else {
+            Out::log("", Separator::$SEPARATOR_CODE, "", "");
+        }
     }
 
     public static function setStyle($style, $styleDebug=null) {

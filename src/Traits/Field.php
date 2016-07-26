@@ -122,7 +122,7 @@ trait Field {
      * @param $value variable value
      * @param $indentation indentation to print (default = 0)
      */
-    public static function pvar($key, $value, $indentation = 0) {
+    public static function var($key, $value, $indentation = 0) {
 
         $EOL = "";
         $CLEAN = "";

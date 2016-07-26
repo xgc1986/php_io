@@ -226,7 +226,7 @@ trait Field {
                 }
             }
             foreach ($value as $key => $field) {
-                Field::pvar($key, $field, $indentation + 1);
+                Field::var($key, $field, $indentation + 1);
             }
         } else {
             if ($value === false) {

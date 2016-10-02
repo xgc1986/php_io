@@ -165,6 +165,9 @@ trait Field {
         catch (\Exception $e) {}
         catch (\Error $e) {}
 
+        if (!$indentation) {
+            echo "\n";
+        }
         if (Out::$CURRENT_FORMAT === Out::TERM) {
             echo $VAR_STYLE_BG . $spaces . $VAR_STYLE_NAME . $key . ' : ';
         } else {

@@ -181,6 +181,11 @@ class Out {
         Out::$level = $level + 2;
     }
 
+    // new
+    public static function getLevel( ) {
+        return Out::$level - 2;
+    }
+
     /**
      * Stop printing the lines
      */

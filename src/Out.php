@@ -60,7 +60,8 @@ class Out {
                 $EOL = Out::$EOL;
             }
 
-            echo "$LS$pre$text";
+            $theLine = trim("$pre$text");
+            echo "$LS$theLine";
 
             if (Out::$fullDebug) {
                 $bt = debug_backtrace(false, Out::$level + 1);
@@ -68,11 +69,15 @@ class Out {
                 $function = $bt[Out::$level]["function"];
                 $line = $bt[Out::$level - 1]["line"];
 
-                $w = Terminal::width();
+                $w = Terminal::width(); // 211
 
                 $out = " $class/$function:$line";
-                if (strlen("$pre$text") <= $w ) {
-                    $spaces = Out::generateSpaces($w - strlen("$pre$text") - strlen("$out") - 1);
+
+                //$theLine = substr(trim("$pre$text"), 0, -10);
+                //$theLine = join(PHP_EOL, explode(PHP_EOL, $theLine));
+
+                if (strlen($theLine) <= $w ) {
+                    $spaces = Out::generateSpaces($w - strlen($theLine) - strlen("$out") - 1);
                     echo "$spaces$LSD$out$EOL$CLEAN\n";
                 } else {
                     $spaces = Out::generateSpaces($w - strlen("$out") - 1);
